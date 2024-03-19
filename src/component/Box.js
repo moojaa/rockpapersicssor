@@ -27,7 +27,7 @@ const Box = (props) => {
                         <img src='/img/question.png'alt='box-img' />
                     </animated.div>
                     <animated.div className='flipCard' style={{ transform }}>
-                        <img src={props.item?.img} alt='box-img' />
+                        {props.item? <img src={props.item?.img} alt='box-img' />:""}
                     </animated.div>
                 </div>
                 <h2>{props.result}</h2>
