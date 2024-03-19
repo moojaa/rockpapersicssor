@@ -24,10 +24,10 @@ const Box = (props) => {
                 <h1>{props.title}</h1>
                 <div className='flip'>
                     <animated.div className='flipCard' style={{transform,opacity:opacity.to(value => 1-value)}}>
-                        <img src='/img/question.png' />
+                        <img src='/img/question.png'alt='box-img' />
                     </animated.div>
                     <animated.div className='flipCard' style={{ transform }}>
-                        <img src={props.item?.img} />
+                        <img src={props.item?.img} alt='box-img' />
                     </animated.div>
                 </div>
                 <h2>{props.result}</h2>

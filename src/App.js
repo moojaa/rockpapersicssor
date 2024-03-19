@@ -107,13 +107,13 @@ function App() {
         </Row>
         <div className='d-flex justify-content-around'>
           <CardHoverEffect>
-            <img onClick={() => play("scissors")} className='card-style img-flued shadow' src='/img/scissors.png' />
+            <img onClick={() => play("scissors")} className='card-style img-flued shadow' src='/img/scissors.png ' alt='card-img'/>
           </CardHoverEffect>
           <CardHoverEffect>
-            <img onClick={() => play("rock")} className='card-style img-flued shadow' src='/img/rock.png' />
+            <img onClick={() => play("rock")} className='card-style img-flued shadow' src='/img/rock.png'alt='card-img' />
           </CardHoverEffect>
           <CardHoverEffect>
-            <img onClick={() => play("paper")} className='card-style img-flued shadow' src='/img/paper.png' />
+            <img onClick={() => play("paper")} className='card-style img-flued shadow' src='/img/paper.png' alt='card-img'/>
           </CardHoverEffect>
           {/* <button className='button-style' onClick={() => play("rock")}>
             <img lassName='card-style img-flued shadow' src='/img/rock.png' />
