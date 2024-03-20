@@ -13,14 +13,19 @@ const Box = (props) => {
     let result;
     if (props.result === "비김") {
         result = "tie"
-    } else {
-        result = props.result === "승리" ? "win" : "fail"
+    } else if(props.result === "승리"){
+        result = "win"
+        // result = props.result === "승리" ? "win" : "fail"
+    } else if(props.result === "패배"){
+        result = "fail"
+    } else{
+        result = ""
     }
 
     return (
 
         <div>
-            <div className={`box ${result ? result : ""}`}>
+            <div className={`box ${result ? result : ""} rounded`}>
                 <h1>{props.title}</h1>
                 <div className='flip'>
                     <animated.div className='flipCard' style={{transform,opacity:opacity.to(value => 1-value)}}>

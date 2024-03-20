@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import './App.css';
-import Box from './component/Box'
-import { Col, Container, Row } from 'react-bootstrap';
+import Box from './component/Box';
+import Score from './component/score/score'
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useSpring, animated} from '@react-spring/web';
 
 //박스 2개(타이틀,사진정보,결과값)
@@ -43,6 +44,7 @@ const choice = {
     img: "/img/paper.png"
   },
 }
+
 const imgURLs = Object.values(choice).map(item => item.img);
 
 console.log(imgURLs)
@@ -53,6 +55,8 @@ function App() {
   const [result, setResult] = useState("")
   const [comResult, setComResult] = useState("")
   const [flipped,setFlipped] = useState(false)
+  const [userScore,setUserScore] = useState(0)
+  const [computerScore,setComputerScore] = useState(0)
   
   // const [ImgIndex,setImgIndex]= useState(0)
 
@@ -83,8 +87,14 @@ function App() {
   const comJudge = (result) => {
     if (result === "비김") {
       return "비김"
-    } else if (result === "승리") return "패배"
-    else if (result === "패배") return "승리"
+    } else if (result === "승리"){
+      setUserScore(userScore +1)
+      return "패배"
+    }
+    else if (result === "패배") {
+      setComputerScore(computerScore +1)
+      return "승리"
+    }
   }
 
   const randomChoice = () => {
@@ -94,26 +104,37 @@ function App() {
     return choice[final]
   }
 
+  const resetScore = ()=>{
+    setUserScore(0)
+    setComputerScore(0)
+    window.location.reload()
+  }
+
   return (
     <div className='vh-100 text-white'>
-      <Container>
+      <Container className='pt-5'>
         <Row>
-          <Col lg={6} className='d-flex justify-content-center'>
-            <Box title="you" item={userSelect} result={result} flipped={flipped} />
+          <Col className='d-flex justify-content-center'>
+            <Box title="user" item={userSelect} result={result} flipped={flipped} />
           </Col>
-          <Col lg={6} className='d-flex justify-content-center'>
+          <Col lg={1} className='d-flex flex-column'>
+            <Score name="user Score" score={userScore}/>
+            <Score name="computer Score" score={computerScore}/>
+            <Button onClick={resetScore} className=' my-2' variant='danger'>reset</Button>
+          </Col>
+          <Col className='d-flex justify-content-center'>
             <Box title="computer" item={computerSelect} result={comResult} flipped={flipped} />
           </Col>
         </Row>
         <div className='d-flex justify-content-around'>
           <CardHoverEffect>
-            <img onClick={() => play("scissors")} className='card-style img-flued shadow' src='/img/scissors.png ' alt='card-img'/>
+            <img onClick={() => play("scissors")} className='rounded card-size shadow' src='/img/scissors.png ' alt='card-img'/>
           </CardHoverEffect>
           <CardHoverEffect>
-            <img onClick={() => play("rock")} className='card-style img-flued shadow' src='/img/rock.png'alt='card-img' />
+            <img onClick={() => play("rock")} className='rounded card-size shadow' src='/img/rock.png'alt='card-img' />
           </CardHoverEffect>
           <CardHoverEffect>
-            <img onClick={() => play("paper")} className='card-style img-flued shadow' src='/img/paper.png' alt='card-img'/>
+            <img onClick={() => play("paper")} className='rounded card-size shadow' src='/img/paper.png' alt='card-img'/>
           </CardHoverEffect>
           {/* <button className='button-style' onClick={() => play("rock")}>
             <img lassName='card-style img-flued shadow' src='/img/rock.png' />
@@ -122,7 +143,6 @@ function App() {
             <img lassName='card-style img-flued' src='/img/paper.png' />
           </button> */}
         </div>
-        <div className='main'>연속 10회 승리시 이스터에그 오픈</div>
       </Container>
     </div>
   );
